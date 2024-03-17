@@ -47,11 +47,14 @@ const color = {
 export const theme = {
   text: {
     size: {
+      xs: 12,
       sm: 14,
       base: 16,
       md: 18,
       lg: 20,
       xl: 24,
+      '2xl': 32,
+      '3xl': 40,
     },
     weight: {
       light: '200',
@@ -75,6 +78,7 @@ export const theme = {
   },
   color,
   space: {
+    '2xs': 4,
     xs: 8,
     sm: 16,
     md: 24,
@@ -111,7 +115,7 @@ export const theme = {
         width: 0,
         height: 0,
       },
-      shadowOpacity: 0.6,
+      shadowOpacity: 0.2,
       shadowRadius: 5,
     },
   ],
