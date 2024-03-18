@@ -43,6 +43,5 @@ export default Categories;
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
-    flex: 1,
   },
 });

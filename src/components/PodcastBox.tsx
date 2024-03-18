@@ -1,48 +1,59 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+import {IPodcast} from '../constants/types/Podcast';
+import {useNavigation} from '@react-navigation/native';
 
-const PodcastBox = () => {
+const PodcastBox: React.FC<{podcast: IPodcast}> = ({podcast, titleDesc}) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('../assets/images/folder.jpg')}
-        style={styles.image}
-      />
-      <View>
-        <Text style={styles.title}>Podcast Box</Text>
-        <Text style={styles.description} numberOfLines={1}>
-          Podcast Box is a podcast app that helps you find the best podcasts to
-          listen to.
-        </Text>
-        <Text style={styles.episodes}>400 episodes</Text>
+    <TouchableOpacity
+      onPress={() => navigation.push('PodcastScreen', {podcast: podcast})}
+      style={styles.boxContainer}>
+      <View style={styles.imageContainer}>
+        <Image
+          source={{uri: podcast?.artworkUrl600}}
+          style={styles.podcastImage}
+        />
       </View>
-    </View>
+      {titleDesc && (
+        <View style={styles.textContainer}>
+          <Text style={styles.titleText}>{podcast?.collectionName}</Text>
+          <Text style={styles.subtitleText}>{podcast?.artistName}</Text>
+        </View>
+      )}
+    </TouchableOpacity>
   );
 };
 
 export default PodcastBox;
 
 const styles = StyleSheet.create({
-  container: {
+  boxContainer: {
     flexDirection: 'row',
-    gap: 10,
-    width: 300,
     marginVertical: 10,
   },
-  image: {
-    width: 70,
-    height: 70,
-    borderRadius: 15,
+  imageContainer: {
+    width: 100,
+    height: 100,
+    marginRight: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
+  podcastImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
   },
-  description: {
-    color: '#ccc',
+  textContainer: {
+    flex: 1,
   },
-  episodes: {
+  titleText: {
     fontSize: 16,
-    color: '#70a5fa',
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  subtitleText: {
+    fontSize: 14,
+    marginTop: 10,
   },
 });

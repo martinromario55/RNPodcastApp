@@ -1,20 +1,16 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Header from '../../../components/Header';
-import CardBox from '../../../components/CardBox';
+import PodcastBox from '../../../components/PodcastBox';
 
-const Trending = () => {
+const Trending = ({podcasts}: any) => {
   return (
     <View style={styles.container}>
       <Header title={"Editor's Pick"} />
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <CardBox BGcolor={'#f00'} />
-        <CardBox BGcolor={'#f00'} />
-        <CardBox BGcolor={'#f00'} />
-        <CardBox BGcolor={'#f00'} />
-        <CardBox BGcolor={'#f00'} />
-        <CardBox BGcolor={'#f00'} />
-        <CardBox BGcolor={'#f00'} />
+        {podcasts?.map((podcast: any) => (
+          <PodcastBox podcast={podcast} key={podcast.trackId} />
+        ))}
       </ScrollView>
     </View>
   );
