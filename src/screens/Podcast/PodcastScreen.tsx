@@ -13,8 +13,7 @@ import {feedurlServices} from '../../services/FeedUrlServices';
 import {Feed} from 'react-native-rss-parser';
 import {theme} from '../../constants/THEME';
 import {ScrollView} from 'react-native-gesture-handler';
-import {addTrack, setupPlayer} from '../../services/PlaybackService';
-import TrackPlayer from 'react-native-track-player';
+import {addTrack} from '../../services/PlaybackService';
 
 type PodcastScreenProps = RouteProp<{Podcast: {podcast: IPodcast}}, 'Podcast'>;
 
