@@ -1,4 +1,11 @@
-import {ActivityIndicator, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {IPodcast} from '../../constants/types/Podcast';
@@ -6,6 +13,8 @@ import {feedurlServices} from '../../services/FeedUrlServices';
 import {Feed} from 'react-native-rss-parser';
 import {theme} from '../../constants/THEME';
 import {ScrollView} from 'react-native-gesture-handler';
+import {addTrack, setupPlayer} from '../../services/PlaybackService';
+import TrackPlayer from 'react-native-track-player';
 
 type PodcastScreenProps = RouteProp<{Podcast: {podcast: IPodcast}}, 'Podcast'>;
 
@@ -55,9 +64,27 @@ const PodcastScreen = () => {
                     }}
                     style={styles.episodeImage}
                   />
-                  <Text style={styles.episodeTitle} numberOfLines={1}>
-                    {item?.title}
-                  </Text>
+                  <TouchableOpacity
+                    onPress={async () => {
+                      await addTrack({
+                        id: item?.id,
+                        url: item?.enclosures[0]?.url,
+                        title: item?.title,
+                        artist: item?.itunes?.author,
+                        album: item?.itunes?.subtitle,
+                      });
+                      // await TrackPlayer.play();
+                      // console.log('Track', item?.enclosures[0]);
+                      // console.log('Track', item?.enclosures[0]?.url);
+                      // await setupPlayer().then(() => {
+                      //   TrackPlayer.play();
+                      //   console.log('Playing...');
+                      // });
+                    }}>
+                    <Text style={styles.episodeTitle} numberOfLines={1}>
+                      {item?.title}
+                    </Text>
+                  </TouchableOpacity>
                 </View>
               ))}
             </View>
