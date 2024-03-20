@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Player from './Player';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
@@ -17,7 +17,7 @@ const BottomTabBar: React.FC<BottomTabBarProps> = props => {
   const tabBarActiveTintColor = theme.color.blueDark;
   const tabBarInactiveTintColor = theme.color.greyLight;
 
-  const onTabPress = (routeName: string, routeIndex: number) => {
+  const onTabPress = (routeName: string) => {
     props.navigation.navigate(routeName);
   };
 
@@ -33,7 +33,7 @@ const BottomTabBar: React.FC<BottomTabBarProps> = props => {
               : tabBarInactiveTintColor;
           return (
             <TouchableOpacity
-              onPress={() => onTabPress(route.name, index)}
+              onPress={() => onTabPress(route.name)}
               key={route.key}
               style={styles.tabBarStyle}>
               <FontAwesome name={icon} size={30} color={color} />
